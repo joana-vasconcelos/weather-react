@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Weather.css";
-import formattedDate from "./formattedDate";
+import formatDate from "./formatDate";
 import axios from "axios";
 
 import maxTemp from "./images/max-temp.png";
@@ -10,8 +10,10 @@ import pin from "./images/pin.png";
 export default function Weather(props) {
   let [city, setCity] = useState(props.defaultCity);
   let [weather, setWeather] = useState({});
+  let [result, setResult] = useState(false);
 
   function showWeather(response) {
+    setResult(true);
     setWeather({
       city: response.data.name,
       country: response.data.sys.country,
@@ -27,12 +29,16 @@ export default function Weather(props) {
     });
   }
 
-  function handleSubmit(event) {
-    event.preventDefault();
+  function search() {
     let apiKey = "0d9bd7b9270c9eee20fc452755853c0d";
     let units = "metric";
     let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=${units}&appid=${apiKey}`;
     axios.get(url).then(showWeather);
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    search();
   }
 
   function showCity(event) {
@@ -54,75 +60,86 @@ export default function Weather(props) {
     </div>
   );
 
-  return (
-    <div>
-      <div className="Form">{form}</div>
-      <div className="Location">
-        <ul className="currently">
-          <li>
-            <h2 className="city" id="city">
-              {weather.city}
-            </h2>
-          </li>
-          <li className="country" id="country">
-            {weather.country}
-          </li>
-          <li className="units">
-            {" "}
-            <a href="/" id="celsius" className="active">
-              °C
-            </a>{" "}
-            |{" "}
-            <a href="/" id="fahrenheit">
-              °F
-            </a>{" "}
-          </li>
-        </ul>
-      </div>
+  if (result) {
+    return (
+      <div>
+        <div className="Form">{form}</div>
+        <div className="Location">
+          <ul className="currently">
+            <li>
+              <h2 className="city" id="city">
+                {weather.city}
+              </h2>
+            </li>
+            <li className="country" id="country">
+              {weather.country}
+            </li>
+            <li className="units">
+              {" "}
+              <a href="/" id="celsius" className="active">
+                °C
+              </a>{" "}
+              |{" "}
+              <a href="/" id="fahrenheit">
+                °F
+              </a>{" "}
+            </li>
+          </ul>
+        </div>
 
-      <div className="Weather">
-        <div className="row">
-          <div className="col-3 current-weather">
-            <img src={weather.icon} alt="" width="150px" id="weather-icon" />
-          </div>
+        <div className="Weather">
+          <div className="row">
+            <div className="col-3 current-weather">
+              <img src={weather.icon} alt="" width="150px" id="weather-icon" />
+            </div>
 
-          <div className="col-4 current-day">
-            <div className="current-day-text">
-              <h1 className="temperature">
-                {" "}
-                <span id="temperature">{Math.round(weather.temperature)}</span>°
-              </h1>
+            <div className="col-4 current-day">
+              <div className="current-day-text">
+                <h1 className="temperature">
+                  {" "}
+                  <span id="temperature">
+                    {Math.round(weather.temperature)}
+                  </span>
+                  °
+                </h1>
 
-              <formattedDate date={weather.date} />
+                <formatDate date={weather.date} />
 
-              <p className="temperature max-min">
-                <img src={maxTemp} alt="" width="30px" />
-                <span id="max-current-temp">
-                  <strong>{Math.round(weather.maxTemperature)}</strong>
+                <p className="temperature max-min">
+                  <img src={maxTemp} alt="" width="30px" />
+                  <span id="max-current-temp">
+                    <strong>{Math.round(weather.maxTemperature)}</strong>
+                  </span>{" "}
+                  <strong>°</strong>
+                  <img src={minTemp} alt="" width="30px" />{" "}
+                  <span id="min-current-temp">
+                    {Math.round(weather.minTemperature)}
+                  </span>
+                  °
+                </p>
+              </div>
+            </div>
+            <div className="col-3 current-characteristics">
+              <p>
+                <span id="current-sky">{weather.description}</span>
+                <br />
+                Feels like{" "}
+                <span id="feels-like">{Math.round(weather.feelsLike)}</span>°
+                <br />
+                Humidity <span id="humidity">{weather.humidity}</span>%
+                <br />
+                Wind <span id="wind">
+                  {Math.round(3.6 * weather.wind)}
                 </span>{" "}
-                <strong>°</strong>
-                <img src={minTemp} alt="" width="30px" />{" "}
-                <span id="min-current-temp">
-                  {Math.round(weather.minTemperature)}
-                </span>
-                °
+                km/h
               </p>
             </div>
           </div>
-          <div className="col-3 current-characteristics">
-            <p>
-              <span id="current-sky">{weather.description}</span>
-              <br />
-              Feels like{" "}
-              <span id="feels-like">{Math.round(weather.feelsLike)}</span>°
-              <br />
-              Humidity <span id="humidity">{weather.humidity}</span>%
-              <br />
-              Wind <span id="wind">{Math.round(3.6 * weather.wind)}</span> km/h
-            </p>
-          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  } else {
+    search();
+    return "Loading";
+  }
 }
