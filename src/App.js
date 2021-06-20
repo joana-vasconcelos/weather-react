@@ -1,4 +1,4 @@
-import "./styles.css";
+import "./App.css";
 import Form from "./Form";
 import Location from "./Location";
 import Weather from "./Weather";
