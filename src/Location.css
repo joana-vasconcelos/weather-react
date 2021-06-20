@@ -1,0 +1,43 @@
+.currently {
+  margin-bottom: 0;
+}
+
+li {
+  display: inline-block;
+  list-style: none;
+}
+
+.city {
+  color: #0c5e7e;
+  padding-bottom: 15px;
+  font-weight: 500;
+  margin-left: 35px;
+  text-transform: capitalize;
+}
+
+.country {
+  color: rgba(0, 0, 0, 0.7);
+  font-size: 14px;
+  margin-left: 15px;
+  position: relative;
+  bottom: 3px;
+}
+
+.units {
+  margin-left: 135px;
+  color: #0c5e7e;
+  position: relative;
+  bottom: 3px;
+}
+
+#celsius,
+#fahrenheit {
+  color: #0c5e7e;
+  text-decoration: none;
+}
+
+.active {
+  color: #0c5e7e;
+  font-weight: bold;
+  cursor: default;
+}

@@ -1,9 +1,7 @@
-
 import "./styles.css";
 import Form from "./Form";
 import Location from "./Location";
 import Weather from "./Weather";
-
 
 export default function App() {
   return (
