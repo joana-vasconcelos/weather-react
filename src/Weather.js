@@ -13,7 +13,6 @@ export default function Weather(props) {
   let [result, setResult] = useState(false);
 
   function showWeather(response) {
-    setResult(true);
     setWeather({
       city: response.data.name,
       country: response.data.sys.country,
@@ -27,6 +26,7 @@ export default function Weather(props) {
       wind: response.data.wind.speed,
       icon: `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
     });
+    setResult(true);
   }
 
   function search() {
@@ -103,7 +103,7 @@ export default function Weather(props) {
                   °
                 </h1>
 
-                <CurrentDate date={weather.data} />
+                <CurrentDate date={weather.date} />
 
                 <p className="temperature max-min">
                   <img src={maxTemp} alt="" width="30px" />
