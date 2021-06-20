@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Weather.css";
-import formatDate from "./formatDate";
 import axios from "axios";
+import CurrentDate from "./CurrentDate";
 
 import maxTemp from "./images/max-temp.png";
 import minTemp from "./images/min-temp.png";
@@ -103,7 +103,7 @@ export default function Weather(props) {
                   °
                 </h1>
 
-                <formatDate date={weather.date} />
+                <CurrentDate date={weather.data} />
 
                 <p className="temperature max-min">
                   <img src={maxTemp} alt="" width="30px" />
