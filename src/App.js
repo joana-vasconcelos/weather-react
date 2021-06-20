@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
+import "./styles.css";
+import Form from "./Form";
+import Location from "./Location";
+import Weather from "./Weather";
+
+
+export default function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="container">
+        <div className="frame">
+          <Form />
+          <Location city="Lisbon" country="PT" />
+          <Weather
+            temperature={24}
+            day="Saturday"
+            date={5}
+            month="April"
+            hours={15}
+            minutes={37}
+            maxTemperature={26}
+            minTemperature={18}
+            currentSky="Sunny"
+            feelsLike={23}
+            humidity={35}
+            wind={6}
+          />
+        </div>
+      </div>
     </div>
   );
 }
-
-export default App;

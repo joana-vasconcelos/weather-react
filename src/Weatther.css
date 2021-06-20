@@ -1,0 +1,37 @@
+.current-weather {
+  text-align: right;
+  margin-left: 30px;
+}
+
+.current-day {
+  text-align: left;
+}
+
+.current-day-text {
+  text-align: center;
+  display: inline-block;
+}
+
+.day-hour {
+  font-size: 14px;
+}
+
+.current-characteristics {
+  line-height: 35px;
+  font-size: 15px;
+  padding-top: 5px;
+  margin-left: 30px;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.current-characteristics::first-letter {
+  text-transform: capitalize;
+}
+
+.temperature {
+  color: #0c5e7e;
+}
+
+.max-min {
+  margin-bottom: 10px;
+}
